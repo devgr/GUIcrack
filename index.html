@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project Five</title>
+
+<link rel="stylesheet" type="text/css" href="http://localhost:2014/css/7592.css" />
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="term.js"></script>
+  
+<script>
+  var socket = io('http://localhost:8080');
+  socket.on('connect', function(){
+		
+    
+  });
+	
+
+  
+  socket.on('message', function (data) {
+    console.log(data);
+    var str = data.toString();
+    
+    
+    if(str.indexOf("(monitor mode") > -1){
+      
+
+      var node=document.createElement("li");
+      
+      var textnode=document.createTextNode(data.toString());
+      node.appendChild(textnode);
+      var loader = document.querySelector("#loadImg");
+      loader.style.visibility = "hidden";
+      document.querySelector("#MonEnable").appendChild(node);
+
+    }
+    
+     
+
+    
+
+  });
+
+  socket.on('airodumpOut', function(data){
+    console.log(data);
+
+  }); 
+
+  function airodump(){
+    socket.emit('airodump');
+    //console.log("called airodump");
+  };
+
+  function myFunct(){
+  		socket.emit('test');
+      var loader = document.querySelector("#loadImg");
+      //loader.setAttribute('visibility', 'visible');
+      loader.style.visibility = "visible";
+  };
+
+  function launchFullscreen(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+}
+
+function exitFullscreen() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
+
+function submitAdminCreds(){
+
+      var settingsDict = {username:"", password:"", wirelessCard:""};
+
+      var inputUsername= document.querySelector("#username");
+      localStorage.setItem("username", inputUsername.value);
+      settingsDict.username = document.querySelector("#username");
+      
+      var inputPassword = document.querySelector("#password");
+      localStorage.setItem("password", inputPassword.value);
+      settingsDict.password = document.querySelector("#password");
+      
+      var inputWirelessCard = document.querySelector("#wirelessCard");
+      localStorage.setItem("wirelessCard", inputWirelessCard.value);
+      settingsDict.wirelessCard = settingsDict.password = document.querySelector("#wirelessCard");
+
+      socket.emit('submitAdminCreds',settingsDict);
+
+
+};
+
+
+
+
+
+function placeholder(){
+          
+          console.log("Connected")
+
+          document.querySelector("#username").placeholder =  localStorage.getItem("username");
+          document.querySelector("#wirelessCard").placeholder =  localStorage.getItem("wirelessCard");
+          
+
+
+};
+
+
+
+
+
+
+</script>
+</head>
+<body id="body" onload="placeholder();">
+    <div id="wrapper">
+        <div id="headerwrap">
+        	<div id="header">
+            	<h1 >The Pentester's Toolkit</h1>
+
+            	
+            	<hr>
+                <div id="sse1">
+  					<div id="sses1">
+
+            
+
+    					<ul>
+                  <li class="effect-1 sub-b"><a onclick="airodump();">iwlist</a></li>
+    						  <li class="effect-1 sub-b"><a onclick="exitFullscreen();">Exit Fullscreen</a></li>
+      						<li class="effect-1 sub-b"><a onclick="launchFullscreen(document.documentElement);">Fullscreen</a></li>
+      						<li class="effect-1 sub-b"><a id="modalBtn" onclick="animateFunction();">Settings</a></li>
+      						<script type="text/javascript">
+
+      						function animateFunction () { 
+                    var elem = document.querySelector("#loginModal");
+      							elem.style.visibility = (elem.style.visibility == "visible") ? "hidden" : "visible";
+                    elem.classList.toggle('popup-animation');
+
+
+      						};
+                  function rotateAnimation(){
+
+                    var el = document.querySelector('#wrapper');
+                    console.log(el);
+                    el.classList.toggle('rotate-Animation');
+                    
+                  };
+
+                  function airCrack(){
+                      var elemAir = document.querySelector("#airModal");
+                      elemAir.style.visibility = (elemAir.style.visibility == "visible") ? "hidden" : "visible";
+                      elemAir.classList.toggle('popup-animation');
+                  };
+      						
+                  
+
+      						</script>
+    					</ul>
+  				    </div>
+			    </div>
+            </div>
+            
+        <div id="contentliquid">
+        	<div id="contentwrap">
+        		<div id="content">
+           			<a class="item" onclick="airCrack();" ><img src="http://localhost:2014/scan.jpg" height="300" width="300"></a>
+        		</div>
+        		<div id="content">
+           			<div class="item"><img src="http://placehold.it/300.png/09f/fff"></div>
+        		</div>
+        		<div id="content">
+           			<div class="item"><img src="http://placehold.it/300.png/09f/fff"></div>
+        		</div>
+        		<div id="content">
+           			<div class="item"><img src="http://placehold.it/300.png/09f/fff"></div>
+        		</div>
+        		<div id="content">
+           			<div class="item"><img src="http://placehold.it/300.png/09f/fff" ></div>
+        		</div>
+        		<div id="content">
+           			<div class="item"><img src="http://placehold.it/300.png/09f/fff"></div>
+        		</div>
+        		<div id="content">
+           			<div class="item"><img src="http://placehold.it/300.png/09f/fff"></div>
+        		</div>
+        		<div id="content">
+           			<div class="item"><img src="http://placehold.it/300.png/09f/fff"></div>
+        		</div>
+        		<div id="content">
+           			<div class="item"><img src="http://placehold.it/300.png/09f/fff"></div>
+        		</div>
+        		<div id="content">
+           			<div class="item"><img src="http://placehold.it/300.png/09f/fff"></div>
+        		</div>
+        		
+        	</div>
+        </div>
+        
+        <div id="footerwrap">
+        <div id="footer">
+            <h3></h3>
+
+        </div>
+        </div>
+    </div>
+
+
+
+<a href="#x" class="overlay" id="login_form"></a>
+        <div id="loginModal" class="popup">
+            <form class="form-container">
+				<div class="form-title"><h2>Settings</h2></div>
+				<hr>
+					<div class="form-title">Admin Username</div>
+						<input class="form-field" type="text" id="username" placeholder=""/><br />
+						<div class="form-title">Admin Password</div>
+							<input class="form-field" type="password" id="password" /><br />
+              <div class="form-title">Wireless Card</div>
+              <input class="form-field" type="text" id="wirelessCard" /><br />
+						<div class="submit-container">
+							<a class="submit-button"  value="Submit" onclick="submitAdminCreds();" />Save</a>
+						</div>
+</form>
+
+
+
+            <a class="close" onclick="animateFunction();"></a>
+        </div>
+
+
+
+        <!-- popup form #2 -->
+        <a href="#x" class="overlay" id="join_form"></a>
+        <div id="airModal" class="popup">
+
+            <form class="form-container">
+                      <div class="form-title"><h2>AirCrack-ng</h2></div>
+                      <hr>
+                      
+
+                        
+
+
+                      <ul id="MonEnable">
+                        <li><img id="loadImg" class="myImage" src="http://localhost:2014/load.gif" height="42" width="42"></li>
+                      </ul>
+                      <div class="submit-container">
+                            <a class="submit-button"  value="EnableMonitorMode" onclick="myFunct();" />EnableMonitorMode</a>
+                      </div>
+            </form>
+
+
+            <a class="close" onclick="airCrack();"></a>
+        </div>
+
+
+       
+
+</body>
+</html>
